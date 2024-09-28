@@ -7,7 +7,7 @@ const Cart = ({ cart }) => {
       {cart.map((meal, index) => (
         <React.Fragment key={index}>
           <ListItem>
-            <ListItemText primary={meal.name} secondary={`$${meal.price.toFixed(2)}`} />
+            <ListItemText primary={meal.name} secondary={`${meal.price.toFixed(2)}€`} />
           </ListItem>
           <Divider />
         </React.Fragment>
