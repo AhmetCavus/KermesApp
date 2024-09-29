@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/KermesApp/static/js/main.6734572b.js",
+    "main.js": "/KermesApp/static/js/main.96f6d028.js",
     "static/js/453.3e6a5577.chunk.js": "/KermesApp/static/js/453.3e6a5577.chunk.js",
     "index.html": "/KermesApp/index.html",
-    "main.6734572b.js.map": "/KermesApp/static/js/main.6734572b.js.map",
+    "main.96f6d028.js.map": "/KermesApp/static/js/main.96f6d028.js.map",
     "453.3e6a5577.chunk.js.map": "/KermesApp/static/js/453.3e6a5577.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6734572b.js"
+    "static/js/main.96f6d028.js"
   ]
 }
