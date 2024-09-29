@@ -11,7 +11,7 @@ export const MealProvider = ({ children }) => {
   // Simulate fetching data (this can be replaced with a real API call)
   useEffect(() => {
     const initialMealsData = [
-        { id: 1, name: 'Dönerteller', price: 10, category: "Etliler", image: '/images/etliler.jpg' },
+        { id: 1, name: 'Dönerteller', price: 10, category: "Etliler", image: '/images/doner-teller.jpg' },
         { id: 2, name: 'Pommdöner', price: 6, category: "Etliler", image: '/images/pommdoner.jpg' },
         { id: 3, name: 'Döner', price: 7, category: "Etliler", image: '/images/doner.jpg' },
         { id: 4, name: 'Kuzu Pirzola / Lamm Kotelett', price: 10, category: "Etliler", image: '/images/kuzu-pirzola.jpg' },
