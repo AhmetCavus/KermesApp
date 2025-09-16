@@ -3,13 +3,31 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CssBaseline, GlobalStyles, ThemeProvider, createTheme } from "@mui/material";
+
+const theme = createTheme();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <GlobalStyles
+        styles={{
+          "html, body, #root": { minHeight: "100%" },
+          body: {
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/header.bg.png)`,
+            backgroundRepeat: "repeat",          // tile both directions
+            backgroundSize: "auto",              // keep original tile size (use "200px" if you want)
+            backgroundPosition: "top left",
+            backgroundAttachment: "scroll",      // scrolls with content
+          },
+        }}
+      />
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
 

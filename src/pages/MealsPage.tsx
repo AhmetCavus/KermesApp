@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useMeals } from "../components/MealProvider";
 import CheckoutModal from "../components/CheckoutModal";
-import Header from "../components/Header";
+import Header from "../components/MenuHeader";
 import StickyCart from "../components/StickyCart";
 import { useState } from "react";
 import { Meal } from "../types/meal";
@@ -17,7 +17,7 @@ import NavigationBar from "../components/NavigationBar";
 
 const MealsPage: React.FC = () => {
   const [cart, setCart] = useState<Meal[]>([]);
-  const [open, setOpen] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
 
   const { meals, categories } = useMeals();
 
@@ -108,12 +108,12 @@ const MealsPage: React.FC = () => {
         cart={cart}
         totalPrice={totalPrice}
         resetCart={resetCart}
-        setOpen={setOpen}
+        setOpen={() => {setOpenCart(true)}}
       />
 
       <CheckoutModal
-        open={open}
-        setOpen={setOpen}
+        open={openCart}
+        setOpen={setOpenCart}
         cart={cart}
         removeFromCart={removeFromCart}
         resetCart={resetCart}
