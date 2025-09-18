@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useMeals } from "../components/MealProvider";
+import { useMeals } from "../provider/MealContext";
 import CheckoutModal from "../components/CheckoutModal";
 import Header from "../components/MenuHeader";
 import StickyCart from "../components/StickyCart";
@@ -23,12 +23,12 @@ const MealsPage: React.FC = () => {
 
   // Add meal to cart
   const addToCart = (meal: Meal) => {
-    setCart((prevCart) => [...prevCart, meal]);
+    setCart((prevCart) => [...prevCart, {...meal, _id: `${meal._id}_${prevCart.length}`}]);
   };
 
   // Remove meal by id
   const removeFromCart = (mealId: string | number) => {
-    setCart((prevCart) => prevCart.filter((meal) => meal.id !== mealId));
+    setCart((prevCart) => prevCart.filter((meal) => meal._id !== mealId));
   };
 
   // Reset cart
@@ -72,7 +72,7 @@ const MealsPage: React.FC = () => {
                     {meals
                       .filter((meal) => meal.category === category.name)
                       .map((meal) => (
-                        <Grid columns={{ xs: 12, sm: 6, md: 4 }} key={meal.id}>
+                        <Grid columns={{ xs: 12, sm: 6, md: 4 }} key={meal._id}>
                           <Card>
                             <CardActionArea onClick={() => addToCart(meal)}>
                               <CardMedia

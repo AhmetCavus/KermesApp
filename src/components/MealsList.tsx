@@ -19,7 +19,7 @@ const MealsList: React.FC<MealsListProps> = ({ meals, addToCart }) => {
   return (
     <Grid container spacing={4}>
       {meals.map((meal) => (
-        <Grid columns={{ xs: 4, sm: 6, md: 4 }} key={meal.id}>
+        <Grid columns={{ xs: 4, sm: 6, md: 4 }} key={meal._id}>
           <Card>
             <CardContent>
               <Typography variant="h6">{meal.name}</Typography>

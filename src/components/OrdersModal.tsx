@@ -21,9 +21,9 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 // import { Order } from "../types/Order";
 import { MealItem } from "../types/mealItem";
-import { useMeals } from "./MealProvider";
+import { useMeals } from "./../provider/MealContext";
 import OrderIdService from "../utils/orderIdService";
-import { Order } from "../types/order.tmp";
+import { Order } from "../types/order";
 
 interface OrdersModalProps {
   open: boolean;
@@ -39,7 +39,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
   const { meals } = useMeals();
 
   const [draft, setDraft] = useState<Order>(() => ({
-    id: "",
+    _id: "",
     meals: [],
     title: "",
     memo: "",
@@ -50,7 +50,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
   useEffect(() => {
     if (open) {
       setDraft({
-        id: "",
+        _id: "",
         meals: meals.map(
           (meal): MealItem => ({ meal, quantity: 0, memo: "", status: "idle" })
         ),
@@ -80,7 +80,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
     setDraft((prev: any) => ({
       ...prev,
       meals: prev.meals.map((mi: MealItem): MealItem =>
-        mi.meal.id === mealId ? { ...mi, quantity: mi.quantity + 1 } : mi
+        mi.meal._id === mealId ? { ...mi, quantity: mi.quantity + 1 } : mi
       ),
     }));
 
@@ -88,7 +88,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
     setDraft((prev: any) => ({
       ...prev,
       meals: prev.meals.map((mi: MealItem): MealItem =>
-        mi.meal.id === mealId && mi.quantity > 0
+        mi.meal._id === mealId && mi.quantity > 0
           ? { ...mi, quantity: mi.quantity - 1 }
           : mi
       ),
@@ -98,7 +98,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
     setDraft((prev: any) => ({
       ...prev,
       meals: prev.meals.map((mi: MealItem): MealItem =>
-        mi.meal.id === mealId ? { ...mi, memo: note } : mi
+        mi.meal._id === mealId ? { ...mi, memo: note } : mi
       ),
     }));
 
@@ -106,7 +106,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
     if (totalItems === 0) return;
     createNewOrder({
       ...draft, 
-      id: OrderIdService.getInstance().createNextId(),
+      _id: OrderIdService.getInstance().createNextId(),
       createdAt: new Date(), 
       status: "idle", 
       meals: draft.meals.filter((item: MealItem) => {  return item.quantity > 0 })
@@ -176,7 +176,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
         >
           <List dense disablePadding>
             {draft.meals.map((mi: MealItem, idx: number) => (
-              <React.Fragment key={mi.meal.id}>
+              <React.Fragment key={mi.meal._id}>
                 <ListItem
                   sx={{
                     px: 1.5,
@@ -190,7 +190,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
                     <span>
                       <IconButton
                         size="large"
-                        onClick={() => dec(mi.meal.id)}
+                        onClick={() => dec(mi.meal._id)}
                         disabled={mi.quantity === 0}
                       >
                         <RemoveIcon />
@@ -234,13 +234,13 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
                       size="small"
                       placeholder="Notiz (optional)…"
                       value={mi.memo}
-                      onChange={handleItemNoteChange(mi.meal.id)}
+                      onChange={handleItemNoteChange(mi.meal._id)}
                       sx={{ mt: 1 }}
                     />
                   </Stack>
 
                   <Tooltip title="Hinzufügen" arrow>
-                    <IconButton size="large" onClick={() => inc(mi.meal.id)}>
+                    <IconButton size="large" onClick={() => inc(mi.meal._id)}>
                       <AddIcon />
                     </IconButton>
                   </Tooltip>

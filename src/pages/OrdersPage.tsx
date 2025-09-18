@@ -2,12 +2,14 @@ import { Box, Container, Fab, Typography } from "@mui/material"
 import Header from "../components/MenuHeader"
 import NavigationBar from "../components/NavigationBar"
 import PinInput from "../components/PinInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Add } from "@mui/icons-material";
 import OrdersModal from "../components/OrdersModal";
-import { Order } from "../types/order.tmp";
+import { Order } from "../types/order";
 import OrdersSection from "./OrdersSection";
 import OrderEditModal from "../components/OrderEditModal";
+import { addItemToCollection, updateItem } from "../api/api";
+import { useOrders } from "../provider/OrderContext";
 
 const OrdersPage: React.FC = () => {
 
@@ -15,7 +17,14 @@ const OrdersPage: React.FC = () => {
     const [openCreateOrder, setOpenCreateOrder] = useState(false)
     const [openEditOrder, setOpenEditOrder] = useState(false)
     const [editOrder, setEditOrder] = useState<Order | null>(null)
-    const [orders, setOrders] = useState<Order[]>([])
+    const { orders: remoteOrders } = useOrders ();
+    const [localOrders, setLocalOrders] = useState<Order[]>(() => {
+        return remoteOrders
+    })
+
+    useEffect(() => {
+      setLocalOrders(remoteOrders)
+    }, [remoteOrders])
     
     const validateInput = (input: string) => {
         console.log(input)
@@ -26,8 +35,25 @@ const OrdersPage: React.FC = () => {
         }
     }
 
-    const handleCreateNewOrder = (order: Order) => {
-        setOrders((prev) => [...prev, order])
+    const handleCreateNewOrder = async (order: Order) => {
+      try {
+        await addItemToCollection("order", order)
+        setLocalOrders((prev) => [...prev, order])
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
+    }
+
+    const handleUpdateOrder = async (updatedOrder: Order) => {
+      try {
+        await updateItem("order", updatedOrder._id.toString(), updatedOrder)
+         setLocalOrders((prev) =>
+                prev.map((order) => (order._id === updatedOrder._id ? updatedOrder : order))
+              );
+              setOpenEditOrder(false);
+      } catch (error) {
+        console.error("Error updating order:", error);
+      }
     }
     
     return (
@@ -38,7 +64,7 @@ const OrdersPage: React.FC = () => {
           <Header />
 
           {!pinUnlocked && <PinInput onComplete={validateInput} />}
-          {pinUnlocked && <OrdersSection orders={orders} onEditOrder={(order) => {
+          {pinUnlocked && <OrdersSection orders={localOrders} onEditOrder={(order) => {
             setEditOrder(order)
             setOpenEditOrder(true)
           }} />}
@@ -77,12 +103,7 @@ const OrdersPage: React.FC = () => {
             open={openEditOrder}
             order={editOrder}
             onClose={() => setOpenEditOrder(false)}
-            onSave={(updatedOrder) => {
-              setOrders((prev) =>
-                prev.map((order) => (order.id === updatedOrder.id ? updatedOrder : order))
-              );
-              setOpenEditOrder(false);
-            }}
+            onSave={(o) => handleUpdateOrder(o)}
         />
       </>
     );

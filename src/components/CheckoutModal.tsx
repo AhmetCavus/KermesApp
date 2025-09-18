@@ -44,7 +44,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <IconButton
                     edge="end"
                     color="secondary"
-                    onClick={() => removeFromCart(meal.id)}
+                    onClick={() => removeFromCart(meal._id)}
                   >
                     <DeleteIcon />
                   </IconButton>

@@ -14,7 +14,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 // import { Order } from "../types/order";
 import { MealItem } from "../types/mealItem";
-import { Order } from "../types/order.tmp";
+import { Order } from "../types/order";
 
 export interface OrderItemCardProps {
   order: Order;
@@ -83,7 +83,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
             spacing={2}
           >
             <Typography variant="h5" fontWeight={700} noWrap>
-              Bestellung: {order.id}
+              Bestellung: {order._id}
             </Typography>
 
             <Chip size="small" color={chipColor} label={label} />
@@ -129,7 +129,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
             <>
               {visibleMeals.map((mi) => (
                 <Chip
-                  key={mi.meal.id}
+                  key={mi.meal._id}
                   size="small"
                   label={`x${mi.quantity} ${mi.meal.name}`}
                   variant="outlined"

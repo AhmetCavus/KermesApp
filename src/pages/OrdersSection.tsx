@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Box, Tabs, Tab, Chip, Stack, Typography } from "@mui/material";
 import OrderItemCard from "../components/OrderItemCard";
-import { Order } from "../types/order.tmp"; // ensure path/casing matches
+import { Order } from "../types/order"; // ensure path/casing matches
 
 interface OrdersSectionProps {
   orders: Order[];
@@ -97,7 +97,7 @@ const OrdersSection: React.FC<OrdersSectionProps> = ({
             <Stack spacing={2} sx={{ mt: 1 }}>
               {grouped[key].map((order) => (
                 <OrderItemCard
-                  key={order.id}
+                  key={order._id}
                   order={order}
                   onEdit={onEditOrder}
                   onClick={onCardClick}

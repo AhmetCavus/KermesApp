@@ -1,7 +1,7 @@
 import { MealItem } from "./mealItem";
 
 export type Order = {
-  id: string | number;
+  _id: string | number;
   meals: MealItem[];
   title: string;
   memo?: string;

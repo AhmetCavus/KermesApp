@@ -25,7 +25,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import BlockIcon from "@mui/icons-material/Block";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
-import { Order } from "../types/order.tmp";
+import { Order } from "../types/order";
 import { MealItem } from "../types/mealItem";
 
 /**
@@ -112,7 +112,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
     setDraft({
       ...draft,
       meals: draft.meals.map((mi: MealItem) =>
-        mi.meal.id === mealId ? { ...mi, status: next } : mi
+        mi.meal._id === mealId ? { ...mi, status: next } : mi
       ),
     });
   };
@@ -122,7 +122,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
     setDraft({
       ...draft,
       meals: draft.meals.map((mi: MealItem) =>
-        mi.meal.id === mealId ? { ...mi, quantity: mi.quantity + 1 } : mi
+        mi.meal._id === mealId ? { ...mi, quantity: mi.quantity + 1 } : mi
       ),
     });
   };
@@ -132,7 +132,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
     setDraft({
       ...draft,
       meals: draft.meals.map((mi: MealItem) =>
-        mi.meal.id === mealId ? { ...mi, quantity: Math.max(0, mi.quantity - 1) } : mi
+        mi.meal._id === mealId ? { ...mi, quantity: Math.max(0, mi.quantity - 1) } : mi
       ),
     });
   };
@@ -144,7 +144,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
       setDraft({
         ...draft,
         meals: draft.meals.map((mi: MealItem) =>
-          mi.meal.id === mealId ? { ...mi, memo: e.target.value } : mi
+          mi.meal._id === mealId ? { ...mi, memo: e.target.value } : mi
         ),
       });
     };
@@ -241,7 +241,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
             >
               <List dense disablePadding>
                 {draft.meals.map((mi: MealItem, idx: number) => (
-                  <React.Fragment key={mi.meal.id}>
+                  <React.Fragment key={mi.meal._id}>
                     <ListItem
                       sx={{
                         px: 1.5,
@@ -257,7 +257,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
                           <span>
                             <IconButton
                               size="small"
-                              onClick={() => dec(mi.meal.id)}
+                              onClick={() => dec(mi.meal._id)}
                               disabled={mi.quantity === 0}
                             >
                               <RemoveIcon fontSize="small" />
@@ -268,7 +268,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
                           {mi.quantity}
                         </Typography>
                         <Tooltip title="Mehr" arrow>
-                          <IconButton size="small" onClick={() => inc(mi.meal.id)}>
+                          <IconButton size="small" onClick={() => inc(mi.meal._id)}>
                             <AddIcon fontSize="small" />
                           </IconButton>
                         </Tooltip>
@@ -303,7 +303,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
                           size="small"
                           placeholder="Notiz (optional)…"
                           value={mi.memo}
-                          onChange={setItemMemo(mi.meal.id)}
+                          onChange={setItemMemo(mi.meal._id)}
                           sx={{ mt: 1 }}
                         />
                       </Stack>
@@ -314,7 +314,7 @@ const OrderEditModal: React.FC<OrderEditModalProps> = ({
                         size="small"
                         value={mi.status}
                         onChange={(_, next: MealItemStatus | null) =>
-                          setItemStatus(mi.meal.id, next)
+                          setItemStatus(mi.meal._id, next)
                         }
                         aria-label={`${mi.meal.name} status`}
                       >

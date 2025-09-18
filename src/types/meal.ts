@@ -1,5 +1,5 @@
 export type Meal = {
-  id: string | number;
+  _id: string | number;
   name: string;
   price: number;
   category: string;
