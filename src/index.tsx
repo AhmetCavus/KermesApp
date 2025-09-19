@@ -3,31 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { CssBaseline, GlobalStyles, ThemeProvider, createTheme } from "@mui/material";
-
-const theme = createTheme({
-  palette: {
-    mode: "light", // or "dark"
-    primary: {
-      main: "#0f766e",
-      light: "#14b8a6",
-      dark: "#115e59",
-      contrastText: "#fff",
-    },
-    secondary: {
-      main: "#f59e0b",
-      light: "#fbbf24",
-      dark: "#b45309",
-      contrastText: "#111827",
-    },
-    success: { main: "#16a34a" },
-    warning: { main: "#eab308" },
-    error: { main: "#dc2626" },
-    info: { main: "#2563eb" },
-    background: { default: "#f9fafb", paper: "#ffffff" },
-    text: { primary: "#0f172a", secondary: "#475569" },
-  },
-});
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
+import theme from './style/theme';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
