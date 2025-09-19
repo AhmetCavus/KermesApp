@@ -3,19 +3,22 @@ import MealsPage from "./pages/MealsPage";
 import { MealProvider } from './provider/MealContext';
 import OrdersPage from './pages/OrdersPage';
 import { OrderProvider } from './provider/OrderContext';
+import AboutusPage from './pages/AboutusPage';
+import Imprint from './pages/Imprint';
 
 const App: React.FC = () => {
   return (
     <MealProvider>
-      <Router basename="/">
+      <Router basename="/kermes">
         <Routes>
           <Route path="/" element={<MealsPage />} />
-          <Route path="/aboutus" element={<MealsPage />} />
+          <Route path="/aboutus" element={<AboutusPage />} />
           <Route path="/orders" element={
             <OrderProvider>
               <OrdersPage />
             </OrderProvider>
           } />
+          <Route path="/imprint" element={<Imprint />} />
         </Routes>
       </Router>
     </MealProvider>

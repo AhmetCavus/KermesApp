@@ -15,10 +15,12 @@ import EditIcon from "@mui/icons-material/Edit";
 // import { Order } from "../types/order";
 import { MealItem } from "../types/mealItem";
 import { Order } from "../types/order";
+import { Delete } from "@mui/icons-material";
 
 export interface OrderItemCardProps {
   order: Order;
   onEdit?: (order: Order) => void;
+  onDelete?: (order: Order) => void;
   onClick?: (order: Order) => void;
   maxMealsPreview?: number; // how many meal chips to show before "+N mehr"
 }
@@ -39,6 +41,7 @@ const STATUS_CONFIG: Record<
 const OrderItemCard: React.FC<OrderItemCardProps> = ({
   order,
   onEdit,
+  onDelete,
   onClick,
   maxMealsPreview = 4,
 }) => {
@@ -83,7 +86,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
             spacing={2}
           >
             <Typography variant="h5" fontWeight={700} noWrap>
-              Bestellung: {order._id}
+              Bestellung: {order.orderId}
             </Typography>
 
             <Chip size="small" color={chipColor} label={label} />
@@ -92,11 +95,7 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
         subheader={
           <Stack direction="column" spacing={1}>
             {order.title && (
-              <Typography
-                variant="h6"
-                noWrap
-                title={order.title}
-              >
+              <Typography variant="h6" noWrap title={order.title}>
                 {order.title}
               </Typography>
             )}
@@ -133,7 +132,15 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
                   size="small"
                   label={`x${mi.quantity} ${mi.meal.name}`}
                   variant="outlined"
-                  color={mi.status === "idle" ? "default" : mi.status === "pending" ? "warning" : mi.status === "ready" ? "success" : "error"}
+                  color={
+                    mi.status === "idle"
+                      ? "default"
+                      : mi.status === "pending"
+                      ? "warning"
+                      : mi.status === "ready"
+                      ? "success"
+                      : "error"
+                  }
                 />
               ))}
               {hiddenCount > 0 && (
@@ -160,6 +167,18 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
 
       <CardActions sx={{ px: 2, pb: 2, pt: 0 }}>
         <Box sx={{ flex: 1 }} />
+        <Button
+          variant="outlined"
+          color="error"
+          size="small"
+          startIcon={<Delete />}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete?.(order);
+          }}
+        >
+          Löschen
+        </Button>
         <Button
           variant="outlined"
           size="small"

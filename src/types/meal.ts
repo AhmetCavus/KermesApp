@@ -4,4 +4,6 @@ export type Meal = {
   price: number;
   category: string;
   image: string;
+  description?: string;
+  status: "available" | "unavailable" | "deleted";
 };

@@ -34,7 +34,7 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
       } 
     }
 
-    setInterval(fetchData, 5000);
+    setInterval(fetchData, 2500);
   }, []);
 
   return (

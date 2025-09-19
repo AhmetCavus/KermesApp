@@ -1,10 +1,18 @@
 import React from "react";
-import { Box, Typography, Stack, Chip, Avatar } from "@mui/material";
+import { Box, Typography, Stack, Chip, Avatar, Button } from "@mui/material";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import CloudDoneIcon from "@mui/icons-material/CloudDone";
 
-const MenuHeader: React.FC = () => {
+interface MenuHeaderProps {
+  presentationMode: boolean;
+  setPresentationMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MenuHeader: React.FC<MenuHeaderProps> = ({
+  presentationMode,
+  setPresentationMode,
+}) => {
   const today = new Date().toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",
@@ -38,8 +46,8 @@ const MenuHeader: React.FC = () => {
       </Avatar>
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Typography variant="h4" fontWeight={700} noWrap>
-          Kermes 2025 Menü
+        <Typography variant="h5" fontWeight={700} noWrap>
+          VBIM e.V. Gemeindefest Herbst 
         </Typography>
         <Stack
           direction="row"
@@ -52,7 +60,7 @@ const MenuHeader: React.FC = () => {
             <Typography variant="body2">{today}</Typography>
           </Stack>
 
-          <Chip
+          {/* <Chip
             size="small"
             color="primary"
             variant="filled" // if your MUI version doesn’t support "soft", use "filled"
@@ -60,7 +68,14 @@ const MenuHeader: React.FC = () => {
             label="Offline ready"
             sx={{ ml: { xs: 0, sm: 1 } }}
           />
-          <Chip size="small" variant="outlined" label="POS • Fast actions" />
+          <Chip size="small" variant="outlined" label="POS • Fast actions" /> */}
+
+                   <Button
+            variant="outlined"
+            onClick={() => setPresentationMode((prev) => !prev)}
+          >
+            {presentationMode ? "Mit Kategorien" : "Präsentationsmodus"}
+          </Button>
         </Stack>
       </Box>
     </Box>

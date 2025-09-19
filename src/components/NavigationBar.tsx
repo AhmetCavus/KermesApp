@@ -15,6 +15,9 @@ const NavigationBar: React.FC = () => {
             <Button color="inherit" component={RouterLink} to="/aboutus">
               Über uns
             </Button>
+              <Button color="inherit" component={RouterLink} to="/imprint">
+              Impressum
+            </Button>
           {/* <Button color="inherit" component={RouterLink} to="/orders">
             Bestellungen
           </Button> */}

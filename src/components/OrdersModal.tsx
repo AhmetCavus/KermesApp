@@ -40,6 +40,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
 
   const [draft, setDraft] = useState<Order>(() => ({
     _id: "",
+    orderId: "",
     meals: [],
     title: "",
     memo: "",
@@ -51,6 +52,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
     if (open) {
       setDraft({
         _id: "",
+        orderId: "",
         meals: meals.map(
           (meal): MealItem => ({ meal, quantity: 0, memo: "", status: "idle" })
         ),
@@ -106,7 +108,7 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
     if (totalItems === 0) return;
     createNewOrder({
       ...draft, 
-      _id: OrderIdService.getInstance().createNextId(),
+      orderId: OrderIdService.getInstance().createNextId(),
       createdAt: new Date(), 
       status: "idle", 
       meals: draft.meals.filter((item: MealItem) => {  return item.quantity > 0 })
@@ -213,6 +215,14 @@ const OrdersModal: React.FC<OrdersModalProps> = ({
                       >
                         {mi.meal.name}
                       </Typography>
+
+                      {mi.meal.status !== "available" && 
+                        <Chip
+                          label="N/A"
+                          color="error"
+                          size="small"
+                        />
+                      }
 
                       <Stack direction="row" spacing={1} alignItems="center">
                         <Chip

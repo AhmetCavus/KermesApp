@@ -2,6 +2,7 @@ import { MealItem } from "./mealItem";
 
 export type Order = {
   _id: string | number;
+  orderId: string;
   meals: MealItem[];
   title: string;
   memo?: string;

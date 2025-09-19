@@ -6,6 +6,7 @@ import { Order } from "../types/order"; // ensure path/casing matches
 interface OrdersSectionProps {
   orders: Order[];
   onEditOrder?: (order: Order) => void;
+  onDeleteOrder?: (order: Order) => void;
   onCardClick?: (order: Order) => void;
 }
 
@@ -22,6 +23,7 @@ const STATUS_TABS: Array<{ key: StatusKey; label: string }> = [
 const OrdersSection: React.FC<OrdersSectionProps> = ({
   orders,
   onEditOrder,
+  onDeleteOrder,
   onCardClick,
 }) => {
   const countsByStatus = useMemo<Record<StatusKey, number>>(() => {
@@ -100,6 +102,7 @@ const OrdersSection: React.FC<OrdersSectionProps> = ({
                   key={order._id}
                   order={order}
                   onEdit={onEditOrder}
+                  onDelete={onDeleteOrder}
                   onClick={onCardClick}
                 />
               ))}
