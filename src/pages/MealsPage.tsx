@@ -18,7 +18,35 @@ import StickyCart from "../components/StickyCart";
 import { useState } from "react";
 import { Meal } from "../types/meal";
 import NavigationBar from "../components/NavigationBar";
-import Footer from "../components/Footer";
+import MealsGallery, { HeroSlide } from "../components/HeroSlider";
+
+const slides: HeroSlide[] = [
+   {
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/teaser-hero.jpg`,
+    title: "Heute letzter Tag",
+    description: "Solange der Vorrat reicht!",
+  },
+  {
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/adana-hero.jpg`,
+    title: "Adana",
+    description: "Feurig gewürztes Hackfleisch, gegrillt am Spieß",
+  },
+  {
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/icecekler-hero.jpg`,
+    title: "Getränke",
+    description: "Çaylar bizden, Afiyet olsun! (Tee geht auf uns, guten Appetit!)",
+  },
+  {
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/pirzola-hero.jpg`,
+    title: "Rinderkotelett",
+    description: "Saftig gegrillt, mit Beilagen nach Wahl",
+  },
+    {
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/waffel-hero.webp`,
+    title: "Waffel",
+    description: "Mit frischen Früchten, Sahne und Eis",
+  },
+];
 
 const MealsPage: React.FC = () => {
   const [cart, setCart] = useState<Meal[]>([]);
@@ -57,6 +85,10 @@ const MealsPage: React.FC = () => {
           presentationMode={presentationMode}
           setPresentationMode={setPresentationMode}
         />
+
+
+        <MealsGallery slides={slides} />
+
 
         {presentationMode ? (
           // --------------------
