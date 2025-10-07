@@ -15,45 +15,61 @@ import { useMeals } from "../provider/MealContext";
 import CheckoutModal from "../components/CheckoutModal";
 import Header from "../components/MenuHeader";
 import StickyCart from "../components/StickyCart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Meal } from "../types/meal";
 import NavigationBar from "../components/NavigationBar";
 import MealsGallery, { HeroSlide } from "../components/HeroSlider";
+import { useAuth } from "../provider/DataContext";
 
 const slides: HeroSlide[] = [
    {
-    image: `${process.env.REACT_APP_DOMAIN}/images/hero/teaser-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/teaser-hero.jpg`,
     title: "Heute letzter Tag",
     description: "Solange der Vorrat reicht!",
   },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/images/hero/adana-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/adana-hero.jpg`,
     title: "Adana",
     description: "Feurig gewürztes Hackfleisch, gegrillt am Spieß",
   },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/images/hero/icecekler-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/icecekler-hero.jpg`,
     title: "Getränke",
     description: "Çaylar bizden, Afiyet olsun! (Tee geht auf uns, guten Appetit!)",
   },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/images/hero/pirzola-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/pirzola-hero.jpg`,
     title: "Rinderkotelett",
     description: "Saftig gegrillt, mit Beilagen nach Wahl",
   },
     {
-    image: `${process.env.REACT_APP_DOMAIN}/images/hero/waffel-hero.webp`,
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/waffel-hero.webp`,
     title: "Waffel",
     description: "Mit frischen Früchten, Sahne und Eis",
   },
 ];
 
 const MealsPage: React.FC = () => {
+  const { client, isClientInitialized } = useAuth();
   const [cart, setCart] = useState<Meal[]>([]);
   const [openCart, setOpenCart] = useState(false);
-  const [presentationMode, setPresentationMode] = useState(false); // NEW toggle
+  const [presentationMode, setPresentationMode] = useState(false);
+  const { meals, categories, reloadData } = useMeals();
 
-  const { meals, categories } = useMeals();
+  useEffect(() => {
+    if (!isClientInitialized) return;
+    const handleEvent = (updatedMeal: any) => {
+      reloadData(true);
+    };
+
+    const handleConnectionSuccess = () => {
+      reloadData(true);
+    };
+
+    client.socket().on("EVENT_COLLECTION_UPDATE_ITEM", handleEvent);
+    client.socket().on("EVENT_CONNECTION_SUCCESS", handleConnectionSuccess);
+
+  }, [isClientInitialized, client, reloadData]);
 
   // Add meal to cart
   const addToCart = (meal: Meal) => {
@@ -102,7 +118,7 @@ const MealsPage: React.FC = () => {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={`${process.env.REACT_APP_DOMAIN}/${meal.image}`}
+                      image={`${process.env.REACT_APP_DOMAIN}/kermes/${meal.image}`}
                       alt={meal.name}
                     />
                     <CardContent>
@@ -150,7 +166,7 @@ const MealsPage: React.FC = () => {
                     <CardMedia
                       component="img"
                       height="100"
-                      image={`${process.env.REACT_APP_DOMAIN}/${category.image}`}
+                      image={`${process.env.REACT_APP_DOMAIN}/kermes/${category.image}`}
                       alt={`${category.description} category`}
                     />
                     <CardContent>
@@ -180,7 +196,7 @@ const MealsPage: React.FC = () => {
                               <CardMedia
                                 component="img"
                                 height="140"
-                                image={`${process.env.REACT_APP_DOMAIN}/${meal.image}`}
+                                image={`${process.env.REACT_APP_DOMAIN}/kermes/${meal.image}`}
                                 alt={meal.name}
                               />
                               <CardContent>

@@ -211,11 +211,11 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
                 zIndex: 2,
               }}
             >
-              <Typography variant="h3" fontWeight={800} lineHeight={1.2}>
+              <Typography variant="h5" fontWeight={800} lineHeight={1.2}>
                 {s.title}
               </Typography>
               {s.description && (
-                <Typography variant="h5" fontWeight={500} sx={{ opacity: 0.95 }}>
+                <Typography variant="h6" fontWeight={500} sx={{ opacity: 0.95 }}>
                   {s.description}
                 </Typography>
               )}

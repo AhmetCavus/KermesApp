@@ -8,9 +8,9 @@ import OrdersModal from "../components/OrdersModal";
 import { Order } from "../types/order";
 import OrdersSection from "./OrdersSection";
 import OrderEditModal from "../components/OrderEditModal";
-import { addItemToCollection, deleteItemFromCollection, updateItem } from "../api/api";
 import { useOrders } from "../provider/OrderContext";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import { useAuth } from "../provider/DataContext";
 
 const OrdersPage: React.FC = () => {
   const [pinUnlocked, setPinUnlocked] = useState(true);
@@ -23,6 +23,8 @@ const OrdersPage: React.FC = () => {
   const [localOrders, setLocalOrders] = useState<Order[]>(() => {
     return remoteOrders;
   });
+
+  const { client } = useAuth();
 
   useEffect(() => {
     setLocalOrders(remoteOrders);
@@ -39,7 +41,7 @@ const OrdersPage: React.FC = () => {
 
   const handleCreateNewOrder = async (order: Order) => {
     try {
-      await addItemToCollection("order", order);
+      await client.rest().addItemToCollection("order", order);
       setLocalOrders((prev) => [...prev, order]);
     } catch (error) {
       console.error("Error creating order:", error);
@@ -48,7 +50,7 @@ const OrdersPage: React.FC = () => {
 
   const handleUpdateOrder = async (updatedOrder: Order) => {
     try {
-      await updateItem("order", updatedOrder._id.toString(), updatedOrder);
+      await client.rest().updateItem("order", updatedOrder._id.toString(), updatedOrder);
       setLocalOrders((prev) =>
         prev.map((order) =>
           order._id === updatedOrder._id ? updatedOrder : order
@@ -62,7 +64,7 @@ const OrdersPage: React.FC = () => {
 
   const handleDeleteOrder = async (order: Order) => {
     try {
-      await deleteItemFromCollection("order", order._id.toString());
+      await client.rest().deleteItemFromCollection("order", order._id.toString());
       setLocalOrders((prev) =>
         prev.filter((o) => o._id !== order._id)
       );

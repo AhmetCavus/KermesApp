@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import { Order } from "../types/order";
-import { fetchCollection } from "../api/api";
+import { useAuth } from "./DataContext";
 
 type OrderContextType = {
   orders: Order[];
@@ -22,11 +22,12 @@ type OrderProviderProps = {
 export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [error, setError] = useState<any | null>(null);
+  const { client } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
          try {
-           const response = await fetchCollection("order");
+           const response = await client.rest().fetchCollection("order");
 
            setOrders(response.items);
          } catch (err: any) {
