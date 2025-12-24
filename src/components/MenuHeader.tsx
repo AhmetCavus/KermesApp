@@ -47,7 +47,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
         <Typography variant="h5" fontWeight={700} noWrap>
-          VBIM e.V. Gemeindefest Herbst 
+          VBIM e.V. Fischfest
         </Typography>
         <Stack
           direction="row"
