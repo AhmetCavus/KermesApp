@@ -27,7 +27,7 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
          try {
-           const response = await client.rest().fetchCollection("order");
+           const response = await client.rest().fetchCollection({collectionId: "order"});
 
            setOrders(response.items);
          } catch (err: any) {

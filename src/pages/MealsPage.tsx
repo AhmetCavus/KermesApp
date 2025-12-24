@@ -23,27 +23,27 @@ import { useAuth } from "../provider/DataContext";
 
 const slides: HeroSlide[] = [
    {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/teaser-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/teaser-hero.jpg`,
     title: "Heute letzter Tag",
     description: "Solange der Vorrat reicht!",
   },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/adana-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/adana-hero.jpg`,
     title: "Adana",
     description: "Feurig gewürztes Hackfleisch, gegrillt am Spieß",
   },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/icecekler-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/icecekler-hero.jpg`,
     title: "Getränke",
     description: "Çaylar bizden, Afiyet olsun! (Tee geht auf uns, guten Appetit!)",
   },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/pirzola-hero.jpg`,
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/pirzola-hero.jpg`,
     title: "Rinderkotelett",
     description: "Saftig gegrillt, mit Beilagen nach Wahl",
   },
     {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/waffel-hero.webp`,
+    image: `${process.env.REACT_APP_DOMAIN}/images/hero/waffel-hero.webp`,
     title: "Waffel",
     description: "Mit frischen Früchten, Sahne und Eis",
   },
@@ -118,7 +118,7 @@ const MealsPage: React.FC = () => {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={`${process.env.REACT_APP_DOMAIN}/kermes/${meal.image}`}
+                      image={`${process.env.REACT_APP_DOMAIN}/${meal.image}`}
                       alt={meal.name}
                     />
                     <CardContent>
@@ -166,7 +166,7 @@ const MealsPage: React.FC = () => {
                     <CardMedia
                       component="img"
                       height="100"
-                      image={`${process.env.REACT_APP_DOMAIN}/kermes/${category.image}`}
+                      image={`${process.env.REACT_APP_DOMAIN}/${category.image}`}
                       alt={`${category.description} category`}
                     />
                     <CardContent>
@@ -196,7 +196,7 @@ const MealsPage: React.FC = () => {
                               <CardMedia
                                 component="img"
                                 height="140"
-                                image={`${process.env.REACT_APP_DOMAIN}/kermes/${meal.image}`}
+                                image={`${process.env.REACT_APP_DOMAIN}/${meal.image}`}
                                 alt={meal.name}
                               />
                               <CardContent>

@@ -12,10 +12,13 @@ const NavigationBar: React.FC = () => {
             <Button color="inherit" component={RouterLink} to="/">
               Menu
             </Button>
+            <Button color="inherit" component={RouterLink} to="/project">
+              Unser Projekt
+            </Button>
             <Button color="inherit" component={RouterLink} to="/aboutus">
               Über uns
             </Button>
-              <Button color="inherit" component={RouterLink} to="/imprint">
+            <Button color="inherit" component={RouterLink} to="/imprint">
               Impressum
             </Button>
           {/* <Button color="inherit" component={RouterLink} to="/orders">

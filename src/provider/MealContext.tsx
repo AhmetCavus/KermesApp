@@ -33,11 +33,11 @@ export const MealProvider: React.FC<MealProviderProps> = ({ children }) => {
     const fetchData = async () => {
       try {
         if (!isClientInitialized) return;
-        const meals = await client.rest().fetchCollection("meal");
-        const categories = await client.rest().fetchCollection("category");
+        const meals = await client.rest().fetchCollection({collectionId: "meal"});
+        const categories = await client.rest().fetchCollection({collectionId: "category"});
 
-        setMeals(meals.items);
-        setCategories(categories.items);
+        setMeals(meals);
+        setCategories(categories);
       } catch (err: any) {
         setError(err);
       }
@@ -49,8 +49,8 @@ export const MealProvider: React.FC<MealProviderProps> = ({ children }) => {
     if (reloadData) {
       const fetchData = async () => {
         try {
-          const meals = await client.rest().fetchCollection("meal");
-          setMeals(meals.items);
+          const meals = await client.rest().fetchCollection({collectionId: "meal"});
+          setMeals(meals);
           setReloadData(false);
         } catch (err: any) {
           setError(err);
