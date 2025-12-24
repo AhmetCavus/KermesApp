@@ -6,6 +6,7 @@ import { OrderProvider } from "./provider/OrderContext";
 import AboutusPage from "./pages/AboutusPage";
 import Imprint from "./pages/Imprint";
 import { AuthProvider } from "./provider/DataContext";
+import ProjectPage from "./pages/ProjectPage";
 
 const App: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<MealsPage />} />
             <Route path="/aboutus" element={<AboutusPage />} />
-            <Route path="/project" element={<AboutusPage />} />
+            <Route path="/project" element={<ProjectPage />} />
             <Route
               path="/orders"
               element={
