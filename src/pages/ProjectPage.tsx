@@ -1,5 +1,8 @@
-import { Card, CardContent, Container, Typography } from "@mui/material"
+import { Box, Button, Card, CardContent, CardMedia, Container, Typography } from "@mui/material"
 import NavigationBar from "../components/NavigationBar";
+import PayPalIcon from "@mui/icons-material/AccountBalanceWallet";
+
+const PAYPAL_DONATE_URL = "https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=ZXFAVXJMR9YZ4&source=qr&ssrt=1712499270632";
 
 const ProjectPage: React.FC = () => {
     return (
@@ -9,6 +12,8 @@ const ProjectPage: React.FC = () => {
         <Container maxWidth={false} sx={{ pb: "100px", maxWidth: "1200px" }}>
           <Card sx={{ mt: 4, p: 2 }}>
             <CardContent>
+              <CardMedia component="img"
+                         image={`${process.env.REACT_APP_DOMAIN}/images/kizkursuheader.jpg`}/>
               <Typography variant="h4" fontWeight={700} sx={{ mt: 4, mb: 2 }}>
                 Unser Neubauprojekt - Das Mädchen-Schülerwohnheim
               </Typography>
@@ -21,6 +26,26 @@ const ProjectPage: React.FC = () => {
               <Typography variant="body1" sx={{ mb: 2 }}>
                 Mit Ihrer großzügigen Spende ermöglichen Sie nicht nur ein sicheres Zuhause, sondern fördern zugleich die persönliche, geistige und akademische Entwicklung dieser Mädchen.
               </Typography>
+              
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+                <Button variant="contained"
+                        color="primary"
+                        size="large"
+                        startIcon={<PayPalIcon />}
+                        href={PAYPAL_DONATE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          mt: 4,
+                          px: 4,
+                          py: 1.5,
+                          fontWeight: 700,
+                          fontSize: "1rem",
+                          textTransform: "none",
+                        }}>
+                  Jetzt mit PayPal spenden
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Container>
