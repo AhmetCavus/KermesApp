@@ -23,30 +23,25 @@ import { useAuth } from "../provider/DataContext";
 
 const slides: HeroSlide[] = [
    {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/teaser-hero.jpg`,
-    title: "Willkommen zum Fischer-Kermes 2025",
-    description: "Solange der Vorrat reicht!",
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/fischtasche.jpeg`,
+    title: "Willkommen zum Meidericher Gemeindefest",
+    description: "Auch dieses mal zum Jahresende wieder mit leckeren Fisch-Speisen und Getränken!",
   },
-  // {
-  //   image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/adana-hero.jpg`,
-  //   title: "Adana",
-  //   description: "Feurig gewürztes Hackfleisch, gegrillt am Spieß",
-  // },
   {
-    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/icecekler-hero.jpg`,
-    title: "Getränke",
-    description: "Çaylar bizden, Afiyet olsun! (Tee geht auf uns, guten Appetit!)",
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/gebratenechampignons.webp`,
+    title: "Gebratene Champignons",
+    description: "Als Beilage oder Hauptgericht",
   },
-  // {
-  //   image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/pirzola-hero.jpg`,
-  //   title: "Rinderkotelett",
-  //   description: "Saftig gegrillt, mit Beilagen nach Wahl",
-  // },
-  //   {
-  //   image: `${process.env.REACT_APP_DOMAIN}/kermes/images/hero/waffel-hero.webp`,
-  //   title: "Waffel",
-  //   description: "Mit frischen Früchten, Sahne und Eis",
-  // },
+  {
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/gebratenefisch.jpeg`,
+    title: "Gebratener Fisch",
+    description: "Frisch und knusprig, mit hausgemachter Sauce",
+  },
+  {
+    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/gegrilltedorade.jpeg`,
+    title: "Gegrillte Dorade",
+    description: "Wie aus dem Schwarzen Meer",
+  },
 ];
 
 const MealsPage: React.FC = () => {

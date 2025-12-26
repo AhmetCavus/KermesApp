@@ -2,7 +2,7 @@
 import { createTheme } from "@mui/material/styles";
 
 const oceanBlue = {
-  main: "#0b3c5d",        // deep ocean blue
+  main: "#7ec8e3",        // pastel ocean blue
   light: "#1e5f8a",
   dark: "#07293f",
   contrastText: "#ffffff",
