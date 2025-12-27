@@ -29,13 +29,12 @@ export const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
          try {
            const response = await client.rest().fetchCollection({collectionId: "order"});
 
-           setOrders(response.items);
+           setOrders(response);
          } catch (err: any) {
           setError(err);
       } 
     }
-
-    setInterval(fetchData, 2500);
+    fetchData();
   }, []);
 
   return (

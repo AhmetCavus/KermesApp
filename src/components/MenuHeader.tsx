@@ -19,7 +19,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
     day: "numeric",
   });
 
-  const dueDate = new Date("2025-12-28");
+  const dueDate = new Date("2025-12-29");
   const leftDays = Math.ceil(
     (dueDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
   );

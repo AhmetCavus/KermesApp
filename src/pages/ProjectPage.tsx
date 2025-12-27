@@ -13,7 +13,7 @@ const ProjectPage: React.FC = () => {
           <Card sx={{ mt: 4, p: 2 }}>
             <CardContent>
               <CardMedia component="img"
-                         image={`${process.env.REACT_APP_DOMAIN}/images/kizkursuheader.jpg`}/>
+                         image={`${process.env.REACT_APP_DOMAIN}/kermes/images/kizkursuheader.jpg`}/>
               <Typography variant="h4" fontWeight={700} sx={{ mt: 4, mb: 2 }}>
                 Unser Neubauprojekt - Das Mädchen-Schülerwohnheim
               </Typography>

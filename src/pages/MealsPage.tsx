@@ -9,6 +9,7 @@ import {
   Stack,
   Box,
   Chip,
+  CircularProgress,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useMeals } from "../provider/MealContext";
@@ -149,7 +150,10 @@ const MealsPage: React.FC = () => {
           // --------------------
           <Grid container spacing={2}>
             {categories.length === 0 ? (
-              <Typography variant="h6">Loading categories...</Typography>
+              <CircularProgress 
+                size={60}
+                sx={{ margin: "100px auto", display: "block" }}
+              />
             ) : (
               categories.map((category) => (
                 <div
