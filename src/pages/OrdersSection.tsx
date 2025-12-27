@@ -26,6 +26,7 @@ const OrdersSection: React.FC<OrdersSectionProps> = ({
   onDeleteOrder,
   onCardClick,
 }) => {
+  
   const countsByStatus = useMemo<Record<StatusKey, number>>(() => {
     const acc = { idle: 0, pending: 0, ready: 0, completed: 0, canceled: 0 } as Record<
       StatusKey,
