@@ -1,6 +1,7 @@
-import { Box, Button, Card, CardContent, CardMedia, Container, Typography } from "@mui/material"
+import { Box, Button, Card, CardContent, CardMedia, Container, Slider, Stack, Typography } from "@mui/material"
 import NavigationBar from "../components/NavigationBar";
 import PayPalIcon from "@mui/icons-material/AccountBalanceWallet";
+import HeroSlider from "../components/HeroSlider";
 
 const PAYPAL_DONATE_URL = "https://www.paypal.com/donate/?cmd=_s-xclick&hosted_button_id=ZXFAVXJMR9YZ4&source=qr&ssrt=1712499270632";
 
@@ -26,8 +27,64 @@ const ProjectPage: React.FC = () => {
               <Typography variant="body1" sx={{ mb: 2 }}>
                 Mit Ihrer großzügigen Spende ermöglichen Sie nicht nur ein sicheres Zuhause, sondern fördern zugleich die persönliche, geistige und akademische Entwicklung dieser Mädchen.
               </Typography>
+
+              <HeroSlider
+                slides={[
+                  {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-01.jpeg`,
+                    title: "",
+                  },
+                  {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-02.jpeg`,
+                    title: "",
+                  },
+                  {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-03.jpeg`,
+                    title: "",
+                  },
+                  {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-04.jpeg`,
+                    title: "",
+                  },
+                      {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-05.jpeg`,
+                    title: "",
+                  },
+                      {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-06.jpeg`,
+                    title: "",
+                  },
+                      {
+                    image: `${process.env.REACT_APP_DOMAIN}/kermes/images/donation/donation-07.jpeg`,
+                    title: "",
+                  },
+                ]}
+              />
+
+              { /* Last Campaign */ }
+              <Stack>
+                <Typography variant="h5" fontWeight={600} sx={{ mt: 4, mb: 2 }}>
+                  Letzte Spendenkampagne - Ein Stein für die Zukunft
+                </Typography>
+                <img src={`${process.env.REACT_APP_DOMAIN}/kermes/images/donation/campaign.jpeg`} alt="Letzte Spendenkampagne - Ein Stein für die Zukunft" />
+              </Stack>
+                     
+              {
+                /* Bank information */
+              }
+
+              <Typography variant="h5" fontWeight={600} sx={{ mt: 4, mb: 2 }}>
+                Spendenkonto
+              </Typography>
+              <Typography variant="body1">
+                VBIM e.V. <br />
+                IBAN: DE85 3504 0038 0414 5397 00 <br />
+                BIC:  COBADEFFXXX<br />
+                Bank: Commerzbank <br />
+                Verwendungszweck: Spende Mädchenwohnheim
+              </Typography>
               
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                 <Button variant="contained"
                         color="primary"
                         size="large"

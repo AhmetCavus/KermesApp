@@ -5,11 +5,13 @@ import {
   CardMedia,
   Container,
   Typography,
-  Button,
-  Stack,
   Box,
   Chip,
   CircularProgress,
+  Alert,
+  AlertTitle,
+  Stack,
+  Button,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useMeals } from "../provider/MealContext";
@@ -21,12 +23,14 @@ import { Meal } from "../types/meal";
 import NavigationBar from "../components/NavigationBar";
 import MealsGallery, { HeroSlide } from "../components/HeroSlider";
 import { useAuth } from "../provider/DataContext";
+import { Link } from "react-router-dom";
 
 const slides: HeroSlide[] = [
-   {
+  {
     image: `${process.env.REACT_APP_DOMAIN}/kermes/images/fischtasche.jpeg`,
     title: "Willkommen zum Meidericher Gemeindefest",
-    description: "Auch dieses mal zum Jahresende wieder mit leckeren Fisch-Speisen und Getränken!",
+    description:
+      "Auch dieses mal zum Jahresende wieder mit leckeren Fisch-Speisen und Getränken!",
   },
   {
     image: `${process.env.REACT_APP_DOMAIN}/kermes/images/gebratenechampignons.webp`,
@@ -64,7 +68,6 @@ const MealsPage: React.FC = () => {
 
     client.socket().on("EVENT_COLLECTION_UPDATE_ITEM", handleEvent);
     client.socket().on("EVENT_CONNECTION_SUCCESS", handleConnectionSuccess);
-
   }, [isClientInitialized, client, reloadData]);
 
   // Add meal to cart
@@ -93,14 +96,49 @@ const MealsPage: React.FC = () => {
       {presentationMode === false && <NavigationBar />}
 
       <Container maxWidth={false} sx={{ pb: "100px", maxWidth: "2000px" }}>
+
+        <Stack direction="row" sx={{ mt: 2, mb: 2 }}>
+          <Button
+            sx={{ mr: 2 }}
+            variant="outlined"
+            size="small"
+            onClick={() => setPresentationMode((prev) => !prev)}
+          >
+            {presentationMode ? "Mit Kategorien" : "Präsentationsmodus"}
+          </Button>
+          <Chip
+            size="medium"
+            variant="filled"
+            color="warning"
+            label="Die Veranstaltung ist beendet"
+          />
+        </Stack>
+
+        <Alert severity="success" sx={{ mb: 2, mt: 2 }}>
+          <AlertTitle>Vielen Dank!</AlertTitle>
+          Wir bedanken uns herzlich bei allen Gästen und Unterstützern unseres
+          Meidericher Fischfest 2025. Dank Ihrer Teilnahme und Großzügigkeit
+          konnten wir erneut bedeutende Mittel für unsere gemeinnützigen Projekte
+          sammeln.
+        </Alert>
+
+        { !presentationMode && 
+        <Alert severity="info" sx={{ mb: 2, mt: 2 }}>
+          <AlertTitle>Unser Projekt</AlertTitle>
+          Jedes Gericht das Sie hier bestellen, unterstützt die Finanzierung
+          unseres Mädchen-Schülerwohnheims in Duisburg-Meiderich. <br />
+          <Link to="/project" style={{ textDecoration: "none" }}>
+            Mehr erfahren
+          </Link>
+        </Alert>
+        }
+
         <Header
           presentationMode={presentationMode}
           setPresentationMode={setPresentationMode}
         />
 
-
         <MealsGallery slides={slides} />
-
 
         {presentationMode ? (
           // --------------------
@@ -127,7 +165,12 @@ const MealsPage: React.FC = () => {
                   {/* Status Chip */}
                   {meal.status === "unavailable" && (
                     <Box sx={{ position: "absolute", top: 8, right: 8 }}>
-                      <Chip label="Ausverkauft" color="warning" size="medium" sx={{ fontWeight: 900, fontSize: "1.375rem" }} />
+                      <Chip
+                        label="Ausverkauft"
+                        color="warning"
+                        size="medium"
+                        sx={{ fontWeight: 900, fontSize: "1.375rem" }}
+                      />
                     </Box>
                   )}
                   {meal.status === "deleted" && (
@@ -150,7 +193,7 @@ const MealsPage: React.FC = () => {
           // --------------------
           <Grid container spacing={2}>
             {categories.length === 0 ? (
-              <CircularProgress 
+              <CircularProgress
                 size={60}
                 sx={{ margin: "100px auto", display: "block" }}
               />
@@ -162,19 +205,14 @@ const MealsPage: React.FC = () => {
                 >
                   {/* Category Card */}
                   <Card sx={{ mb: 2 }}>
-                    <CardMedia
+                    {/* <CardMedia
                       component="img"
                       height="100"
                       image={`${process.env.REACT_APP_DOMAIN}/kermes/${category.image}`}
                       alt={`${category.description} category`}
-                    />
+                    /> */}
                     <CardContent>
-                      <Typography
-                        variant="h5"
-                        gutterBottom
-                        color="primary"
-                        fontWeight={700}
-                      >
+                      <Typography variant="h5" color="primary" fontWeight={700}>
                         {category.description}
                       </Typography>
                     </CardContent>
@@ -246,7 +284,6 @@ const MealsPage: React.FC = () => {
           </Grid>
         )}
         {/* <Footer /> */}
-
       </Container>
 
       {presentationMode === false && (

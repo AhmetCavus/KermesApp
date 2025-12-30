@@ -2,14 +2,14 @@
 import { createTheme } from "@mui/material/styles";
 
 const oceanBlue = {
-  main: "#7ec8e3",        // pastel ocean blue
+  main: "#00a1e1ff",        // pastel ocean blue
   light: "#1e5f8a",
-  dark: "#07293f",
+  dark: "#0f527eff",
   contrastText: "#ffffff",
 };
 
 const seaAccent = {
-  main: "#38bdf8",        // light sea blue
+  main: "#00b3ffff",        // light sea blue
   light: "#7dd3fc",
   dark: "#0284c7",
   contrastText: "#0b3c5d",
@@ -17,7 +17,7 @@ const seaAccent = {
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
 
     primary: oceanBlue,     // buttons, main actions
     secondary: seaAccent,   // accents, highlights

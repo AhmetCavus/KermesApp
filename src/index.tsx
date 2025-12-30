@@ -17,7 +17,7 @@ root.render(
         styles={{
           "html, body, #root": { minHeight: "100%" },
           body: {
-            backgroundImage: `url(${process.env.PUBLIC_URL}/images/header.bg.png)`,
+            backgroundImage: `url(${process.env.PUBLIC_URL}/images/header.bg.2.png)`,
             backgroundRepeat: "repeat",          // tile both directions
             backgroundSize: "auto",              // keep original tile size (use "200px" if you want)
             backgroundPosition: "top left",

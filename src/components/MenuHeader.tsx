@@ -19,11 +19,6 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
     day: "numeric",
   });
 
-  const dueDate = new Date("2025-12-29");
-  const leftDays = Math.ceil(
-    (dueDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
-  );
-
   return (
     <Box
       sx={{
@@ -51,48 +46,43 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
       </Avatar>
 
       <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <Typography variant="h5" fontWeight={700} noWrap>
-            VBIM e.V. Fischfest
-          </Typography>
-          <Chip
-            size="small"
-            variant="outlined"
-            label={`Noch ${leftDays} Tage`}
-          />
+        <Typography variant="h6" fontWeight={600} noWrap>
+          VBIM e.V. Fischfest
+        </Typography>
+
+        <Stack direction="row" spacing={0.75} alignItems="center">
+          <ScheduleIcon fontSize="small" />
+          <Typography variant="body2">{today}</Typography>
         </Stack>
-        <Typography variant="h6" color="text.primary" sx={{ mt: 1 }}>
-          Willkommen zum Fischfest des VBIM e.V.! Genießen Sie frischen Fisch
-          und Meeresfrüchte in einer warmen Atmosphäre. Wir freuen uns auf Ihren
-          Besuch!
+        <Typography variant="body1" color="text.primary" sx={{ mt: 1 }}>
+          Willkommen zum Fischfest des VBIM e.V.! Mit jedem Kauf unterstützen
+          Sie unsere gemeinnützigen Projekte.
         </Typography>
         <Stack
           direction="row"
           alignItems="center"
           spacing={1.5}
           sx={{ mt: 0.5, flexWrap: "wrap", color: "text.secondary" }}
+        ></Stack>
+        <Stack
+          direction="row"
+          spacing={1.5}
+          alignItems="center"
+          sx={{ mt: 0.5, color: "text.secondary" }}
         >
-          <Stack direction="row" spacing={0.75} alignItems="center">
-            <ScheduleIcon fontSize="small" />
-            <Typography variant="body2">{today}</Typography>
-          </Stack>
-
-          <Button onClick={() => setPresentationMode((prev) => !prev)}>
-            {presentationMode ? "Mit Kategorien" : "Präsentationsmodus"}
-          </Button>
           <Button
             size="small"
             href="https://maps.app.goo.gl/zzt1Wx3byNQs7Vo67"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <MapIcon fontSize="small" sx={{ mr: 0.5 }} />
-            Zum Veranstaltungsort
+            <MapIcon fontSize="small" />
+            Veranstaltungsort
           </Button>
+          <Typography variant="body2" fontSize="small" color="text.secondary">
+            (Hagenauer Str. 57, 47137 Duisburg)
+          </Typography>
         </Stack>
-        <Typography sx={{ mt: 2 }} variant="body2" color="text.secondary">
-          (Veranstaltungsort: Hagenauer Str. 57, 47137 Duisburg)
-        </Typography>
       </Box>
     </Box>
   );
